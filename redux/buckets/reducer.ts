@@ -16,6 +16,11 @@ export function reducer(
       } else {
         return prevState;
       }
+    case REDUX_ACTION.DELETE_BUCKET:
+      const newStatee = prevState.filter(
+        (item) => item.id !== action.payload.id
+      );
+      return newStatee;
 
     default:
       return prevState ? prevState : [];

@@ -1,17 +1,32 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ReactElement } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Main from "../components/ui_layout/Main";
+import { REDUX_ACTION } from "../enum/redux-action.enum";
 import { ReduxStoreModel } from "../model/redux/redux-store-model";
 
+interface Resortinterface {
+  id: number;
+  title: string;
+  price: string;
+  imageUrl: string;
+}
+
 const Bucket = () => {
+  const dispatch = useDispatch();
+
   const buckets: ReduxStoreModel["buckets"] = useSelector<
     ReduxStoreModel,
     ReduxStoreModel["buckets"]
   >((store: ReduxStoreModel) => store.buckets);
-  const deleteItemHandler = (Itemid: number) => {
+  const deleteItemHandler = (info: Resortinterface) => {
     console.log("delete item");
+    dispatch({
+      type: REDUX_ACTION.DELETE_BUCKET,
+      payload: info,
+    });
   };
   return (
     <div className="bucket-wrapper">
@@ -34,10 +49,13 @@ const Bucket = () => {
                 <div className="bocket-item-price">price :{item.price} </div>
                 <button
                   className="bocket-item-delete-button"
-                  onClick={() => deleteItemHandler(item.id)}
+                  onClick={() => deleteItemHandler(item)}
                 >
                   delete item
                 </button>
+                <div className="bucket-button">
+                  <Link href={`/resort/${item.id}`}>info</Link>
+                </div>
               </div>
             ))
           ) : (

@@ -37,6 +37,14 @@
           background-color: red;
           color: white;
           padding: 15px;
+          cursor: pointer;
+        }
+        .bucket-button {
+          border-radius: 10px;
+          background-color: blue;
+          color: white;
+          padding: 15px 20px;
+          cursor: pointer;
         }
       }
       .empty-bucket {

@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactElement } from "react";
+import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 
 import Main from "../../components/ui_layout/Main";
@@ -17,6 +18,7 @@ interface Resortinterface {
 }
 const ResortDetails = ({ data }: any) => {
   const dispatch = useDispatch();
+  const [cookie, setCookie] = useCookies(["bucket"]);
 
   const buckets: ReduxStoreModel["buckets"] = useSelector<
     ReduxStoreModel,
@@ -28,6 +30,15 @@ const ResortDetails = ({ data }: any) => {
       type: REDUX_ACTION.ADD_BUCKET,
       payload: info,
     });
+    const index = buckets.findIndex((item) => item.id === info.id);
+    if (index === -1) {
+      var json_str = JSON.stringify([...buckets, info]);
+      setCookie("bucket", JSON.stringify(json_str), {
+        path: "/",
+        maxAge: 3600, // Expires after 1hr
+        sameSite: true,
+      });
+    }
   };
   const disabledAddbutton = (itemId: number) => {
     console.log("itemId", itemId);
