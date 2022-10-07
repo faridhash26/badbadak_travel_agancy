@@ -1,0 +1,50 @@
+.pagination-wrapper {
+  margin: 50px 0;
+  display: flex;
+  gap: 10px;
+  height: 40px;
+  .page-numbers {
+    display: flex;
+    gap: 10px;
+    .page-number {
+      width: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      background-color: gray;
+      cursor: pointer;
+      color: white;
+    }
+  }
+  .prev {
+    width: 80px;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+  }
+  .next {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+  }
+}
+@media screen and (max-width: 600px) {
+  .pagination-wrapper {
+    flex-direction: column;
+    justify-content: center;
+    .page-numbers {
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+}
