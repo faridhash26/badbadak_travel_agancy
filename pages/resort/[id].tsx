@@ -2,22 +2,43 @@ import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactElement } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import Main from "../../components/ui_layout/Main";
+import { REDUX_ACTION } from "../../enum/redux-action.enum";
+import { ReduxStoreModel } from "../../model/redux/redux-store-model";
 import { resort } from "../../services/resort";
+
 interface Resortinterface {
   id: number;
   title: string;
-  description: string;
   price: string;
   imageUrl: string;
 }
 const ResortDetails = ({ data }: any) => {
-  console.log("asd", data.resort);
+  const dispatch = useDispatch();
+
+  const buckets: ReduxStoreModel["buckets"] = useSelector<
+    ReduxStoreModel,
+    ReduxStoreModel["buckets"]
+  >((store: ReduxStoreModel) => store.buckets);
 
   const addToCartHandler = (info: Resortinterface) => {
-    console.log("adding data");
+    dispatch({
+      type: REDUX_ACTION.ADD_BUCKET,
+      payload: info,
+    });
   };
+  const disabledAddbutton = (itemId: number) => {
+    console.log("itemId", itemId);
 
+    const index = buckets.findIndex((item) => item.id === itemId);
+
+    if (index === -1) {
+      return false;
+    }
+    return true;
+  };
   return (
     <div className="resort-details-wrapper">
       <div className="resort-contaier">
@@ -39,6 +60,7 @@ const ResortDetails = ({ data }: any) => {
           </p>
           <button
             className="add-to-cart"
+            disabled={disabledAddbutton(Number(data.resort.id))}
             onClick={() => addToCartHandler(data.resort)}
           >
             add to cart
