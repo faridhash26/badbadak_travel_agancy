@@ -5,8 +5,10 @@
 
 adding .env.local file in the root project
 then adding  this line
+```bash
 NEXT_PUBLIC_BASE_URL=http://localhost:3000/api
 in this file for api 
+```
 
 
 
