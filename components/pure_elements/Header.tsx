@@ -13,6 +13,9 @@ const Header = () => {
         <li>
           <Link href="/resort">Resort</Link>
         </li>
+        <li>
+          <Link href="/bucket">Bucket</Link>
+        </li>
       </ul>
       <div className="navbar-toggler">
         <button onClick={() => setIsOpen(!isOpen)}>
