@@ -28,20 +28,18 @@ const Resorts = () => {
   const [pageNumber, setpageNumber] = useState(1);
   const [pageInfo, setpageInfo] = useState<PageInfoInterface>();
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [sortData, setSortData] = useState({
     isSortTitle: false,
     isSortPrice: false,
   });
 
   const handleGetResorts = useCallback(async () => {
-
-
     try {
       setLoading(true);
       const res = await resort.get(
         `/resorts?page=${pageNumber}&limit=10&sort_title=${sortData.isSortTitle}&sort_price=${sortData.isSortPrice}`
       );
-      console.log("res ", res.data);
 
       setResortsData(res.data.resorts);
       setpageNumber(Number(res.data.page_number));
@@ -49,8 +47,9 @@ const Resorts = () => {
         total_page: Number(res.data.total_page),
         total: res.data.total,
       });
-    } catch (error) {
-      console.log(error);
+      setErrorMsg("");
+    } catch (error: any) {
+      setErrorMsg(error.message);
     } finally {
       setLoading(false);
     }
@@ -91,6 +90,7 @@ const Resorts = () => {
         </div>
       </div>
       <div className="resorts-cards">
+        {errorMsg && <div>{errorMsg}</div>}
         {loading && <div className="loading">loading ....</div>}
         {resortsData ? (
           resortsData.map((item: ResortArray) => (

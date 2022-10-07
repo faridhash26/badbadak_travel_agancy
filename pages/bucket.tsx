@@ -22,7 +22,6 @@ const Bucket = () => {
     ReduxStoreModel["buckets"]
   >((store: ReduxStoreModel) => store.buckets);
   const deleteItemHandler = (info: Resortinterface) => {
-    console.log("delete item");
     dispatch({
       type: REDUX_ACTION.DELETE_BUCKET,
       payload: info,
@@ -62,7 +61,7 @@ const Bucket = () => {
             <div className="empty-bucket">bucket empty</div>
           )}
         </div>
-        <div className="payment">payment</div>
+        {/* <div className="payment">payment</div> */}
       </div>
     </div>
   );

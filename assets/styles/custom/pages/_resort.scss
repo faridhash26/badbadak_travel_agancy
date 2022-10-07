@@ -42,3 +42,24 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .resort-details-wrapper {
+    margin-top: 20px;
+    .resort-contaier {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      .image-wrapper {
+        width: 80%;
+        height: 30px;
+      }
+      .resort-info-container {
+        margin-top: 250px;
+      }
+      .bucket-button {
+        margin-bottom: 30px;
+      }
+    }
+  }
+}

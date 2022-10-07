@@ -10,14 +10,14 @@ const Card = ({ id, title, imageUrl }: CardProps) => {
   return (
     <div className="card-wrapper">
       <div className="card-image">
-        {/* <Image
+        <Image
           className="image"
           width={260}
           height={260}
           layout="responsive"
           src={imageUrl && imageUrl}
           alt="Picture of the author"
-        /> */}
+        />
       </div>
       <div className="card-info">
         <p className="card-title">{title}</p>

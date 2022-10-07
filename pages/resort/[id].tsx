@@ -41,8 +41,6 @@ const ResortDetails = ({ data }: any) => {
     }
   };
   const disabledAddbutton = (itemId: number) => {
-    console.log("itemId", itemId);
-
     const index = buckets.findIndex((item) => item.id === itemId);
 
     if (index === -1) {
@@ -74,7 +72,9 @@ const ResortDetails = ({ data }: any) => {
             disabled={disabledAddbutton(Number(data.resort.id))}
             onClick={() => addToCartHandler(data.resort)}
           >
-            add to cart
+            {disabledAddbutton(Number(data.resort.id))
+              ? "added"
+              : "add to cart"}
           </button>
           <div className="bucket-button">
             <Link href="/bucket">go to bucket</Link>
