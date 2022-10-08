@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Card from "../../components/pure_elements/Card";
 import Pagination from "../../components/pure_elements/Pagination";
 import Main from "../../components/ui_layout/Main";
+import { REDUX_ACTION } from "../../enum/redux-action.enum";
 import { resort } from "../../services/resort";
 
 interface ResortArray {
@@ -16,6 +18,12 @@ interface PageInfoInterface {
   total_page: number;
   total: number;
 }
+interface Resortinterface {
+  id: number;
+  title: string;
+  price: string;
+  imageUrl: string;
+}
 interface ResortsProps {
   resort: Array<ResortArray>;
   total: number;
@@ -24,6 +32,8 @@ interface ResortsProps {
 }
 
 const Resorts = () => {
+  const dispatch = useDispatch();
+
   const [resortsData, setResortsData] = useState<Array<ResortArray>>([]);
   const [pageNumber, setpageNumber] = useState(1);
   const [pageInfo, setpageInfo] = useState<PageInfoInterface>();
@@ -55,6 +65,12 @@ const Resorts = () => {
     }
   }, [pageNumber, sortData.isSortPrice, sortData.isSortTitle]);
 
+  const addToCartHandler = (info: Resortinterface) => {
+    dispatch({
+      type: REDUX_ACTION.ADD_BUCKET,
+      payload: info,
+    });
+  };
   useEffect(() => {
     handleGetResorts();
   }, [handleGetResorts]);
@@ -99,6 +115,7 @@ const Resorts = () => {
               id={item.id}
               imageUrl={item.imageUrl}
               title={item.title}
+              onclick ={()=>addToCartHandler({id:item.id , imageUrl:item.imageUrl , price:item.price   , title:item.title})}
             />
           ))
         ) : (
