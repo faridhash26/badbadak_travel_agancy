@@ -115,7 +115,15 @@ const Resorts = () => {
               id={item.id}
               imageUrl={item.imageUrl}
               title={item.title}
-              onclick ={()=>addToCartHandler({id:item.id , imageUrl:item.imageUrl , price:item.price   , title:item.title})}
+              price={item.price}
+              onclick={() =>
+                addToCartHandler({
+                  id: item.id,
+                  imageUrl: item.imageUrl,
+                  price: item.price,
+                  title: item.title,
+                })
+              }
             />
           ))
         ) : (
