@@ -26,7 +26,7 @@
     width: 100%;
     gap: 20px;
     .card-title {
-      margin:30px 0 ;
+      margin: 30px 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -34,13 +34,34 @@
       height: 50px;
       line-height: 30px;
     }
-    .more-info-button {
-      background-color: blue;
-      padding: 10px;
+    .group-buttons {
       display: flex;
-      border-radius: 10px;
-      color: white;
-      margin-bottom: 20px;
+      width: 100%;
+
+      justify-content: space-evenly;
+
+      .more-info-button {
+        background-color: blue;
+        padding: 10px;
+        display: flex;
+        border-radius: 10px;
+        color: white;
+        margin-bottom: 20px;
+      }
+      .add-bucket-button {
+        border: none;
+        border-radius: 10px;
+        padding: 0;
+        background-color: black;
+        color: white;
+        display: flex;
+        margin: 0;
+        width: 30%;
+        height: 75%;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
     }
   }
 }
